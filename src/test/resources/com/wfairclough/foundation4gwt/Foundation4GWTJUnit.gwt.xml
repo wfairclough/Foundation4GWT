@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='com.wfairclough.foundation4gwt.Foundation4GWT' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/Foundation4GWT/greet" class="com.wfairclough.foundation4gwt.server.GreetingServiceImpl" />
+
+</module>

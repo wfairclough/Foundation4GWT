@@ -1,0 +1,34 @@
+target/
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# gwt caches and compiled units #
+war/gwt_bree/
+gwt-unitCache/
+
+# boilerplate generated classes #
+.apt_generated/
+
+# more caches and things from deploy #
+war/WEB-INF/deploy/
+war/WEB-INF/classes/
+
+
+maven
+
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+
+# Eclipse
+.project
+.classpath
+.settings
