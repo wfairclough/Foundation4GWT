@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
+<module>
+	<inherits name="com.google.gwt.user.User" />
+
+	<replace-with
+		class="com.wfairclough.foundation4gwt.client.ui.config.DefaultConfigurator">
+		<when-type-is class="com.wfairclough.foundation4gwt.client.ui.config.Configurator" />
+	</replace-with>
+    
+    <replace-with
+        class="com.wfairclough.foundation4gwt.client.ui.resources.internal.DefaultInternalInjector">
+        <when-type-is class="com.wfairclough.foundation4gwt.client.ui.resources.internal.InternalResourceInjector"/>
+    </replace-with>
+    <!-- 
+    <replace-with
+        class="com.github.gwtbootstrap.client.ui.resources.internal.LowVersionIEResourceInjector">
+        <when-type-is class="com.github.gwtbootstrap.client.ui.resources.internal.InternalResourceInjector"/>
+        <when-property-is name="user.agent" value="ie8"/>
+    </replace-with>
+    <replace-with
+        class="com.github.gwtbootstrap.client.ui.resources.internal.IE67ResourceInjector">
+        <when-type-is class="com.github.gwtbootstrap.client.ui.resources.internal.InternalResourceInjector"/>
+        <when-property-is name="user.agent" value="ie6"/>
+    </replace-with> -->
+    
+	<source path="client/resources" />
+	<source path="client/widget" />
+	<source path="client/constants" />
+</module>

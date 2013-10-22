@@ -6,15 +6,6 @@
 <web-app>
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.wfairclough.foundation4gwt.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/Foundation4GWT/greet</url-pattern>
-  </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

@@ -4,6 +4,5 @@
   <inherits name='com.wfairclough.foundation4gwt.Foundation4GWT' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Foundation4GWT/greet" class="com.wfairclough.foundation4gwt.server.GreetingServiceImpl" />
 
 </module>
