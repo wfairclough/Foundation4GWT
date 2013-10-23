@@ -2,6 +2,7 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.Anchor;
 import com.wfairclough.foundation4gwt.client.ui.base.HasButtonSize;
@@ -21,10 +22,18 @@ public class Button extends Anchor implements HasFoundationColor,HasButtonSize, 
 	private FoundationColor color = FoundationColor.DEFAULT;
 	private Radius radius = Radius.DEFAULT;
 	
+	public Button() {
+		StyleHelper.setStyle(this, BUTTON_STYLE_CLASS);
+	}
+	
+	public Button(ClickHandler handler) {
+		this();
+		addClickHandler(handler);
+	}
 	
 	public Button(String text) {
+		this();
 		setText(text);
-		StyleHelper.setStyle(this, BUTTON_STYLE_CLASS);
 	}
 	
 	/**

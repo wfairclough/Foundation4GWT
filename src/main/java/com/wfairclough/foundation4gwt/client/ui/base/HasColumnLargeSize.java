@@ -1,6 +1,5 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.wfairclough.foundation4gwt.client.ui.constants.ColumnLargeSize;
 
 /**
  * Interface for Large Column Size on Columns
@@ -17,6 +16,6 @@ public interface HasColumnLargeSize {
 	 * @param size
 	 *			  the size of the column 	
 	 */
-	public void setColumnLargeSize(ColumnLargeSize size);
+	public void setLargeSize(int size);
 	
 }

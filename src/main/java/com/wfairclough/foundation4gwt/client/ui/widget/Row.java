@@ -1,9 +1,9 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
 
-public class Row extends FlowPanel {
+public class Row extends DivWidget {
 
 	private static String ROW_STYLE_CLASS = "row";
 	
@@ -11,7 +11,7 @@ public class Row extends FlowPanel {
 		StyleHelper.setStyle(this, ROW_STYLE_CLASS);
 	}
 	
-	public void setFullWidthEnabled(boolean enabled)
+	public void setFullWidth(boolean enabled)
 	{
 		if (enabled)
 			getElement().getStyle().setProperty("minWidth", "100%");

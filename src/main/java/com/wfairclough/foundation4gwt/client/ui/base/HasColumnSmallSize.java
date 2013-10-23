@@ -1,6 +1,5 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.wfairclough.foundation4gwt.client.ui.constants.ColumnSmallSize;
 
 /**
  * Interface for Small Column Size on Columns
@@ -17,6 +16,6 @@ public interface HasColumnSmallSize {
 	 * @param size
 	 *			  the size of the column 	
 	 */
-	public void setColumnSmallSize(ColumnSmallSize size);
+	public void setSmallSize(int size);
 	
 }

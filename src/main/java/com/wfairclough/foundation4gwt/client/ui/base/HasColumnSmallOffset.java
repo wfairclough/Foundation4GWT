@@ -1,6 +1,5 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.wfairclough.foundation4gwt.client.ui.constants.ColumnSmallOffset;
 
 /**
  * Interface for Small Column Offset on Columns
@@ -17,6 +16,6 @@ public interface HasColumnSmallOffset {
 	 * @param offset
 	 * 			 	grid value to offset by.
 	 */
-	public void setColumnSmallOffset(ColumnSmallOffset offset);
+	public void setSmallOffset(int offset);
 	
 }

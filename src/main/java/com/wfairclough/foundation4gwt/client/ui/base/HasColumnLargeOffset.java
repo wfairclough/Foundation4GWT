@@ -1,6 +1,5 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.wfairclough.foundation4gwt.client.ui.constants.ColumnLargeOffset;
 
 /**
  * Interface for Large Column Offset on Columns
@@ -17,6 +16,6 @@ public interface HasColumnLargeOffset {
 	 * @param offset
 	 * 			 	grid value to offset by.
 	 */
-	public void setColumnLargeOffset(ColumnLargeOffset offset);
+	public void setLargeOffset(int offset);
 	
 }

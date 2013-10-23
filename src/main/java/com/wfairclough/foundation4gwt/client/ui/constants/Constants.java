@@ -200,4 +200,15 @@ public interface Constants {
 
     // Input
     public static final String BLOCK_LEVEL = "input-block-level";
+
+	public static final String SMALL = "small";
+	public static final String LARGE = "large";
+	
+	public static final String SMALL_OFFSET = "small-offset";
+	public static final String LARGE_OFFSET = "large-offset";
+
+	public static final String PANEL = "panel";
+
+	public static final String ERROR = "error";
+	
 }

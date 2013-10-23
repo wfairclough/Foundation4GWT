@@ -41,4 +41,17 @@ public enum ColumnSmallSize implements Style {
 	public String getWithoutPrefix() {
 		return className;
 	}
+
+	/**
+	 * Get the Value for the size num
+	 * @param size
+	 * @return ColumnSmallSize value for the num
+	 */
+	public static ColumnSmallSize valueForInt(int size) {
+		for (ColumnSmallSize s : values()) {
+			if (s.ordinal() == size)
+				return s;
+		}
+		return null;
+	}
 }
