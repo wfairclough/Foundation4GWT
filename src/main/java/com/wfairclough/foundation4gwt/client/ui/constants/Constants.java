@@ -210,5 +210,7 @@ public interface Constants {
 	public static final String PANEL = "panel";
 
 	public static final String ERROR = "error";
+
+	public static final String METER = "meter";
 	
 }

@@ -24,6 +24,9 @@ public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSm
 		StyleHelper.setStyle(this, COLUMN_STYLE_CLASS);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setSmallSize(int size) {
 		if (size < 1)
 			throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
@@ -34,6 +37,9 @@ public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSm
 		addStyleName(Constants.SMALL + "-" + size);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setLargeSize(int size) {
 		if (size < 1)
 			throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
@@ -44,6 +50,9 @@ public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSm
 		addStyleName(Constants.LARGE + "-" + size);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setSmallOffset(int offset) {
 		if (offset < 1)
 			throw new IllegalArgumentException(OFFSET_ERROR_MESSAGE);
@@ -54,6 +63,9 @@ public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSm
 		addStyleName(Constants.SMALL_OFFSET + "-" + offset);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setLargeOffset(int offset) {
 		if (offset < 1)
 			throw new IllegalArgumentException(OFFSET_ERROR_MESSAGE);
