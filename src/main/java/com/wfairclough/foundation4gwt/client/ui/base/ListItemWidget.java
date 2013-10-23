@@ -16,7 +16,7 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.UListElement;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -27,39 +27,35 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Will Fairclough
  *
  */
-public class ULWidget extends ComplexPanel implements HasId, HasStyle {
+public class ListItemWidget extends ComplexPanel implements HasId, HasStyle {
 	
-	private UListElement list; 
+	private Element li; 
 	
-	public ULWidget() {
-		list = Document.get().createULElement(); 
-        setElement(list); 
+	public ListItemWidget() {
+		li = Document.get().createLIElement().cast(); 
+        setElement(li);
 	}
 	
 	/**
-	 * Add a new li element with widget to the unordered list
+	 * Add a new widget to a li
 	 * 
-	 * @param child add {@link IsWidget} to unordered list
+	 * @param child add {@link IsWidget} to li
 	 */
 	@Override
 	public void add(IsWidget child) {
 		Widget widget = asWidgetOrNull(child);
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(widget, li.getElement()); 
+        this.li.appendChild(widget.getElement()); 
 	}
 	
 	
 	/**
-	 * Add a new li element with widget to the unordered list
+	 * Add a new widget to a li
 	 * 
-	 * @param child add {@link IsWidget} to unordered list
+	 * @param child add {@link IsWidget} to li
 	 */
 	@Override
 	public void add(Widget child) {
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(child, li.getElement());
+		this.li.appendChild(child.getElement());
 	}
 	
 	

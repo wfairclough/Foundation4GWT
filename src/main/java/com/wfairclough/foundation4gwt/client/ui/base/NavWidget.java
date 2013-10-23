@@ -16,7 +16,7 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.UListElement;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -27,13 +27,14 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Will Fairclough
  *
  */
-public class ULWidget extends ComplexPanel implements HasId, HasStyle {
+public class NavWidget extends ComplexPanel implements HasId, HasStyle {
+	private static String NAV_TAG = "nav";
 	
-	private UListElement list; 
+	private Element nav; 
 	
-	public ULWidget() {
-		list = Document.get().createULElement(); 
-        setElement(list); 
+	public NavWidget() {
+		nav = (Element) Document.get().createElement(NAV_TAG); 
+        setElement(nav); 
 	}
 	
 	/**
@@ -44,11 +45,8 @@ public class ULWidget extends ComplexPanel implements HasId, HasStyle {
 	@Override
 	public void add(IsWidget child) {
 		Widget widget = asWidgetOrNull(child);
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(widget, li.getElement()); 
+        nav.appendChild(widget.getElement()); 
 	}
-	
 	
 	/**
 	 * Add a new li element with widget to the unordered list
@@ -57,11 +55,8 @@ public class ULWidget extends ComplexPanel implements HasId, HasStyle {
 	 */
 	@Override
 	public void add(Widget child) {
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(child, li.getElement());
+        nav.appendChild(child.getElement());
 	}
-	
 	
 
 	/**

@@ -10,6 +10,7 @@ target/
 # gwt caches and compiled units #
 war/gwt_bree/
 gwt-unitCache/
+.gwt/
 
 # boilerplate generated classes #
 .apt_generated/

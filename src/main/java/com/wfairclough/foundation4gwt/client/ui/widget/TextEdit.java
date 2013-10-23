@@ -18,18 +18,21 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.HasKeyPressHandlers;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
 import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
-public class TextEdit extends DivWidget implements HasText {
+public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers {
 
 	private static String TEXT_EDIT_STYLE_CLASS = "text-edit";
 	private static String DATA_ERROR_MESSAGE = "data-error-message";
 	private static int widgetCount = 0;
-	
 	
 	private TextBox textBox = new TextBox();
 	private LabelElement label = DOM.createLabel().cast();
@@ -56,11 +59,22 @@ public class TextEdit extends DivWidget implements HasText {
 		setText(text);
 	}
 	
+	/**
+	 * Set the Text for the Label of the {@link TextEdit} field.
+	 * 
+	 * @param text to use
+	 */
 	public void setLabelText(String text)
 	{
 		labelText = text;
+		setLabelHTML();
 	}
 	
+	/**
+	 * Set the small Text for the Label of the {@link TextEdit} field.
+	 * 
+	 * @param text to use
+	 */
 	public void setLabelSmallText(String text)
 	{
 		labelSmallText = text;
@@ -84,9 +98,15 @@ public class TextEdit extends DivWidget implements HasText {
 	public void setError(boolean enabled)
 	{
 		if (enabled) {
-			errorMsg.getStyle().setDisplay(Display.BLOCK);
+			if (!errorMsgText.equals("")) {
+				errorMsg.getStyle().setDisplay(Display.BLOCK);
+				getElement().getStyle().clearPaddingBottom();
+			} else {
+				getElement().getStyle().setPaddingBottom(15.0, Unit.PX);
+			}
 			addStyleName(Constants.ERROR);
 		} else {
+			getElement().getStyle().clearPaddingBottom();
 			errorMsg.getStyle().setDisplay(Display.NONE);
 			removeStyleName(Constants.ERROR);
 		}
@@ -127,6 +147,34 @@ public class TextEdit extends DivWidget implements HasText {
 	public void setErrorMessage(String text) {
 		errorMsgText = text;
 		errorMsg.setInnerHTML(errorMsgText);
+		
+		if (isError())
+			errorMsg.getStyle().setDisplay(Display.BLOCK);
 	}
+	
+	public void setPassword(boolean enabled) {
+		textBox.getElement().setAttribute("type", "password");
+	}
+
+	public int getTabIndex() {
+		return textBox.getTabIndex();
+	}
+
+	public void setAccessKey(char key) {
+		textBox.setAccessKey(key);
+	}
+
+	public void setFocus(boolean focused) {
+		textBox.setFocus(focused);
+	}
+
+	public void setTabIndex(int index) {
+		textBox.setTabIndex(index);
+	}
+
+	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
+		return textBox.addKeyPressHandler(handler);
+	}
+	
 	
 }
