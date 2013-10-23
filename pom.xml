@@ -66,20 +66,39 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
             </resource>
             <resource>
                 <directory>src/main/java</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
             </resource>
         </resources>
 
 		<plugins>
-
+			<plugin>
+				<groupId>com.google.code.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<header>src/license/header.txt</header>
+					<includes>
+						<include>src/**/*.java</include>
+						<include>src/main/java/**/*.xml</include>
+					</includes>
+					<properties>
+						<year>${project.inceptionYear}</year>
+					</properties>
+					<encoding>UTF-8</encoding>
+					<headerDefinitions>
+						<headerDefinition>src/license/header-definition.xml</headerDefinition>
+					</headerDefinitions>
+				</configuration>
+			</plugin>
+		
 			<!-- GWT Maven Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -90,7 +109,6 @@
 						<goals>
 							<goal>compile</goal>
 							<goal>test</goal>
-							<goal>i18n</goal>
 							<goal>resources</goal>
 						</goals>
 					</execution>
@@ -133,4 +151,19 @@
 		</plugins>
 	</build>
 
+	<organization>
+		<name>Will Fairclough</name>
+		<url>http://wfairclough.com</url>
+	</organization>
+	<scm>
+		<url>git@github.com:wfairclough/Foundation4GWT.git</url>
+		<connection>scm:git@github.com:wfairclough/Foundation4GWT.git</connection>
+		<developerConnection>scm:git@github.com:wfairclough/Foundation4GWT.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/wfairclough/Foundation4GWT/issues</url>
+	</issueManagement>
+	<inceptionYear>2013</inceptionYear>
 </project>
