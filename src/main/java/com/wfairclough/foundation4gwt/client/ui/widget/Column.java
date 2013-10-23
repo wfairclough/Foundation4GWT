@@ -1,14 +1,18 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
+import com.wfairclough.foundation4gwt.client.ui.base.HasColumnLargeCentered;
 import com.wfairclough.foundation4gwt.client.ui.base.HasColumnLargeOffset;
 import com.wfairclough.foundation4gwt.client.ui.base.HasColumnLargeSize;
+import com.wfairclough.foundation4gwt.client.ui.base.HasColumnSmallCentered;
 import com.wfairclough.foundation4gwt.client.ui.base.HasColumnSmallOffset;
 import com.wfairclough.foundation4gwt.client.ui.base.HasColumnSmallSize;
 import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
-public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSmallSize, HasColumnLargeOffset, HasColumnSmallOffset {
+public class Column extends DivWidget implements HasColumnLargeSize,
+		HasColumnSmallSize, HasColumnLargeOffset, HasColumnSmallOffset,
+		HasColumnSmallCentered, HasColumnLargeCentered {
 
 	private static String COLUMN_STYLE_CLASS = "columns";
 	public static String OFFSET_ERROR_MESSAGE = "The Column offsets can only be set to 1-12";
@@ -90,6 +94,26 @@ public class Column extends DivWidget implements HasColumnLargeSize, HasColumnSm
 
 	public int getLargeOffset() {
 		return largeOffset;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setLargeCentered(boolean enabled) {
+		if (enabled)
+			StyleHelper.addStyle(this, Constants.LARGE_CENTERED);
+		else
+			StyleHelper.removeStyle(this, Constants.LARGE_CENTERED);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setSmallCentered(boolean enabled) {
+		if (enabled)
+			StyleHelper.addStyle(this, Constants.SMALL_CENTERED);
+		else
+			StyleHelper.removeStyle(this, Constants.SMALL_CENTERED);
 	}
 	
 }

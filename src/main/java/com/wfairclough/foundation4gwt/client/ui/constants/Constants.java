@@ -17,6 +17,8 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.constants;
 
+import com.wfairclough.foundation4gwt.client.ui.base.Style;
+
 
 /**
  * Constants that do not belong to a group of similar values.
@@ -44,10 +46,10 @@ public interface Constants {
 
 	public static final String CARET = "caret";
 
-	public static final String BTN = "btn";
+	public static final String BUTTON = "button";
 
-	public static final String BTN_GROUP = "btn-group";
-
+	public static final String BUTTON_GROUP = "button-group";
+	
 	public static final String BTN_TOOLBAR = "btn-toolbar";
 
 	public static final String CONTAINER = "container";
@@ -212,5 +214,9 @@ public interface Constants {
 	public static final String ERROR = "error";
 
 	public static final String METER = "meter";
+
+	public static final String SMALL_CENTERED = "small-centered";
+	
+	public static final String LARGE_CENTERED = "large-centered";
 	
 }

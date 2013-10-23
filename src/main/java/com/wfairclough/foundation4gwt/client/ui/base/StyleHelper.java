@@ -101,5 +101,25 @@ public class StyleHelper {
 
 		addStyle(widget, style);
 	}
+
+	/**
+	 * Helper method to add a style name.
+	 * 
+	 * @param widget the widget to add the style frome
+	 * @param style the style to add to the widget
+	 */
+	public static void addStyle(UIObject widget, String style) {
+		widget.addStyleName(style);
+	}
+	
+	/**
+	 * Helper method to remove a style name.
+	 * 
+	 * @param widget the widget to remove the style frome
+	 * @param style the style to remove to the widget
+	 */
+	public static void removeStyle(UIObject widget, String style) {
+		widget.removeStyleName(style);
+	}
 	
 }

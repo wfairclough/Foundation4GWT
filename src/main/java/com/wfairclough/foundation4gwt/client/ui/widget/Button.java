@@ -2,6 +2,7 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.dom.client.Style.TextDecoration;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.Anchor;
@@ -24,6 +25,7 @@ public class Button extends Anchor implements HasFoundationColor,HasButtonSize, 
 	
 	public Button() {
 		StyleHelper.setStyle(this, BUTTON_STYLE_CLASS);
+		setTextUnderline(false);
 	}
 	
 	public Button(ClickHandler handler) {
@@ -102,4 +104,13 @@ public class Button extends Anchor implements HasFoundationColor,HasButtonSize, 
 	public Radius getRadius() {
 		return radius;
 	}
+	
+	public void setTextUnderline(boolean enabled) {
+		if (enabled)
+			getElement().getStyle().clearTextDecoration();
+		else 
+			getElement().getStyle().setTextDecoration(TextDecoration.NONE);
+	}
+	
+	
 }
