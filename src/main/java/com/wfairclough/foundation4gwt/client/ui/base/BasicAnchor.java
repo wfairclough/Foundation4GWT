@@ -27,6 +27,7 @@ public class BasicAnchor extends Anchor implements HasHref {
 
 	public BasicAnchor() {
 		super();
+		getElement().setClassName("");
 	}
 
 	/**

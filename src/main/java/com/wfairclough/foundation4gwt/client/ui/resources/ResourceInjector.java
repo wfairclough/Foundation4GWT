@@ -16,10 +16,12 @@
 package com.wfairclough.foundation4gwt.client.ui.resources;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.LinkElement;
+import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.resources.client.TextResource;
 import com.wfairclough.foundation4gwt.client.ui.config.Configurator;
@@ -40,6 +42,7 @@ public class ResourceInjector {
     private static final InternalResourceInjector INJECTOR = GWT.create(InternalResourceInjector.class);
 
     private static HeadElement head;
+    private static BodyElement body;
 
     /**
      * Injects the required CSS styles and JavaScript files into the document
@@ -57,16 +60,36 @@ public class ResourceInjector {
         injectCss(res.foundationMinCss());
         
         injectCss(res.modernizr());
-
+        
         INJECTOR.configure();
     }
 
+    /**
+     * Check if jQuery has been loaded.
+     * @return
+     */
     private native static boolean isNotLoadedJquery() /*-{
         return !$wnd['jQuery'] || (typeof $wnd['jQuery'] !== 'function');
     }-*/;
 
+    /**
+     * Inject a CSS file resources.
+     * 
+     * @param r
+     */
     private static void injectCss(TextResource r) {
         StyleInjector.inject(r.getText());
+    }
+    
+    /**
+     * Inject a JavaScript tag into the body of the DOM
+     * 
+     * @param jsScript The JavaScript to add
+     */
+    public static void injectScript(String jsScript) {
+    	ScriptElement scriptElement = Document.get().createScriptElement();
+    	scriptElement.setInnerHTML(jsScript);
+    	getBody().appendChild(scriptElement);
     }
 
     /**
@@ -80,7 +103,12 @@ public class ResourceInjector {
         link.setHref(GWT.getModuleName() + "/css/" + filename);
         getHead().appendChild(link);
     }
+    
 
+    /**
+     * Get the head tag of the DOM
+     * @return
+     */
     private static HeadElement getHead() {
         if (head == null) {
             Element elt = Document.get().getElementsByTagName("head").getItem(0);
@@ -90,7 +118,26 @@ public class ResourceInjector {
         }
         return head;
     }
+    
+    /**
+     * Get the body tag of the DOM
+     * @return
+     */
+    private static BodyElement getBody() {
+        if (body == null) {
+            Element elt = Document.get().getElementsByTagName("body").getItem(0);
+            assert elt != null : "The host HTML page does not have a <body> element"
+                    + " which is required by ScriptInjector";
+            body = BodyElement.as(elt);
+        }
+        return body;
+    }
 
+    /**
+     * Inject a JavaScript file resources.
+     * 
+     * @param r
+     */
     private static void injectJs(TextResource r) {
         JavaScriptInjector.inject(r.getText());
     }

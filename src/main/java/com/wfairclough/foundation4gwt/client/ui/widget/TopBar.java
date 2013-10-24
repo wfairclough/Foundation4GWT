@@ -31,11 +31,14 @@ public class TopBar extends NavWidget implements HasDataOptions {
 
 	private HashSet<DataOption> dataOptions = new HashSet<DataOption>();
 
+	private TopBarTitle topBarTitle = new TopBarTitle();
+	
 	/**
 	 * Default Constructor to create instance of {@link TopBar}
 	 */
 	public TopBar() {
 		setStyleName(TOP_BAR_CLASS);
+		add(topBarTitle);
 	}
 
 
@@ -47,7 +50,7 @@ public class TopBar extends NavWidget implements HasDataOptions {
 	public void add(IsWidget child) {
 		Widget widget = asWidgetOrNull(child);
 		
-		if (widget != null && ((child instanceof TopBarSection) /*|| (child instanceof TopBarTitle) TODO*/) ) {
+		if (widget != null && ((child instanceof TopBarSection) || (child instanceof TopBarTitle)) ) {
 			super.add(widget, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_TOP_BAR);
@@ -61,7 +64,7 @@ public class TopBar extends NavWidget implements HasDataOptions {
 	 * @param child to add
 	 */
 	public void add(Widget child) {
-		if ((child instanceof TopBarSection) /*|| (child instanceof TopBarTitle) TODO*/) {
+		if ( (child instanceof TopBarSection) || (child instanceof TopBarTitle) ) {
 			super.add(child, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_TOP_BAR);

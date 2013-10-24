@@ -15,12 +15,18 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.resources.internal;
 
+import com.wfairclough.foundation4gwt.client.ui.resources.ResourceInjector;
+
 public class DefaultInternalInjector implements InternalResourceInjector {
 
-    public void configure() {
-    }
-
+	private static String LOAD_FOUNDATION_SCRIPT = "\njQuery(document).ready(function () {\n\tjQuery(document).foundation();\n});\n";
+	
     public void preConfigure() {
+    	
+    }
+	
+    public void configure() {
+    	ResourceInjector.injectScript(LOAD_FOUNDATION_SCRIPT);
     }
 
 }
