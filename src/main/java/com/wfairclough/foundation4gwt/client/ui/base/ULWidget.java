@@ -29,37 +29,59 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ULWidget extends ComplexPanel implements HasId, HasStyle {
 	
+	private static String ADD_LIST_ITEM_ERROR = "Trying to add a widget to a panel that only accepts ListItemWidget.";
+	
 	private UListElement list; 
 	
+	/**
+	 * Default Constructor to create {@link ULWidget} instance
+	 */
 	public ULWidget() {
 		list = Document.get().createULElement(); 
         setElement(list); 
 	}
 	
 	/**
-	 * Add a new li element with widget to the unordered list
+	 * Create a {@link ULWidget} instance with style
 	 * 
-	 * @param child add {@link IsWidget} to unordered list
+	 * @param style to set
+	 */
+	public ULWidget(Style style) {
+		this();
+		setStyle(style);
+	}
+
+	/**
+	 * Add a new li element to the unordered list
+	 * 
+	 * @param child add {@link ListItemWidget} to unordered list
 	 */
 	@Override
 	public void add(IsWidget child) {
-		Widget widget = asWidgetOrNull(child);
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(widget, li.getElement()); 
+        Widget widget = asWidgetOrNull(child);
+		
+		if (widget != null && (child instanceof ListItemWidget) ) {
+			ListItemWidget li = (ListItemWidget)widget;
+			list.appendChild(li.getElement());
+		} else {
+			throw new IllegalArgumentException(ADD_LIST_ITEM_ERROR);
+		}
 	}
 	
 	
 	/**
-	 * Add a new li element with widget to the unordered list
+	 * Add a new li element to the unordered list
 	 * 
-	 * @param child add {@link IsWidget} to unordered list
+	 * @param child add {@link ListItemWidget} to unordered list
 	 */
 	@Override
 	public void add(Widget child) {
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(child, li.getElement());
+		if ((child instanceof ListItemWidget) ) {
+			ListItemWidget li = (ListItemWidget)child;
+			list.appendChild(li.getElement());
+		} else {
+			throw new IllegalArgumentException(ADD_LIST_ITEM_ERROR);
+		}
 	}
 	
 	

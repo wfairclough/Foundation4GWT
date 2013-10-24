@@ -217,4 +217,6 @@ public interface Constants {
 	
 	public static final String LARGE_CENTERED = "large-centered";
 	
+	public static final String DATA_OPTIONS = "data-options";
+	
 }

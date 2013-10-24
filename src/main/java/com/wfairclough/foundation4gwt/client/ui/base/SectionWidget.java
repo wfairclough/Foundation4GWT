@@ -16,65 +16,47 @@
 package com.wfairclough.foundation4gwt.client.ui.base;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * A Simple Ordered List Widget
+ * A Simple Section Tag Widget
  * 
  * @author Will Fairclough
  *
  */
-public class OLWidget extends ComplexPanel implements HasId, HasStyle {
+public class SectionWidget extends ComplexPanel implements HasId, HasStyle {
+	private static String SECTION_TAG = "section";
 	
-	private Element list; 
+	private Element section; 
 	
-	/**
-	 * Default Constructor to create {@link OLWidget} instance
-	 */
-	public OLWidget() {
-		list = Document.get().createElement("ol"); 
-        setElement(list); 
+	public SectionWidget() {
+		section = (Element) Document.get().createElement(SECTION_TAG); 
+        setElement(section); 
 	}
 	
 	/**
-	 * Create a {@link OLWidget} instance with style
+	 * Add a new widget to the section
 	 * 
-	 * @param style to set
-	 */
-	public OLWidget(Style style) {
-		this();
-		setStyle(style);
-	}
-	
-	/**
-	 * Add a new li element with widget to the ordered list
-	 * 
-	 * @param child add {@link IsWidget} to ordered list
+	 * @param child add {@link IsWidget} to the section
 	 */
 	@Override
 	public void add(IsWidget child) {
 		Widget widget = asWidgetOrNull(child);
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(widget, li.getElement()); 
+        section.appendChild(widget.getElement()); 
 	}
 	
-	
 	/**
-	 * Add a new li element with widget to the ordered list
+	 * Add a new widget to the section
 	 * 
-	 * @param child add {@link IsWidget} to ordered list
+	 * @param child add {@link IsWidget} to the section
 	 */
 	@Override
 	public void add(Widget child) {
-		ListItemWidget li = new ListItemWidget();
-		list.appendChild(li.getElement());
-        super.add(child, li.getElement());
+        section.appendChild(child.getElement());
 	}
-	
 	
 
 	/**

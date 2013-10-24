@@ -17,9 +17,13 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import javax.servlet.UnavailableException;
 
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
 import com.wfairclough.foundation4gwt.client.ui.base.HasRadius;
+import com.wfairclough.foundation4gwt.client.ui.base.ListItem;
+import com.wfairclough.foundation4gwt.client.ui.base.ListItemWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
-import com.wfairclough.foundation4gwt.client.ui.base.ULWidget;
+import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
 
 /**
@@ -30,8 +34,9 @@ import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
  * @author Will Fairclough
  *
  */
-public class ButtonGroup extends ULWidget implements HasRadius {
+public class ButtonGroup extends UnorderedList implements HasRadius {
 
+	private static String ADD_ITEM_ERROR = "Trying to add a widget to ButtonGroup that only accepts Button.";
 	public static final String BUTTON_GROUP_CLASS_NAME = "button-group";
 	
 	private Radius radius = Radius.DEFAULT;
@@ -52,6 +57,39 @@ public class ButtonGroup extends ULWidget implements HasRadius {
         	add(btn);
         }
     }
+    
+
+	/**
+	 * Add a {@link Button} to this {@link ButtonGroup}
+	 * 
+	 * @param child to add
+	 */
+	public void add(IsWidget child) {
+		Widget widget = asWidgetOrNull(child);
+		
+		if (widget != null && (child instanceof Button) ) {
+			ListItem li = new ListItem();
+			li.add(widget);
+			super.add(li);
+		} else {
+			throw new IllegalArgumentException(ADD_ITEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Add a {@link Button} to this {@link ButtonGroup}
+	 * 
+	 * @param child to add
+	 */
+	public void add(Widget child) {
+		if (child instanceof Button) {
+			ListItem li = new ListItem();
+			li.add(child);
+			super.add(li);
+		} else {
+			throw new IllegalArgumentException(ADD_ITEM_ERROR);
+		}
+	}
     
 	/**
 	 * {@inheritDoc}
