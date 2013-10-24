@@ -60,8 +60,7 @@ public class ProgressBar extends DivWidget implements HasColumnLargeSize,
 	
 	private Radius radius = Radius.DEFAULT;
 	private FoundationColor color = FoundationColor.DEFAULT;
-	
-	
+
 	public ProgressBar() {
 		StyleHelper.setStyle(this, PROGRESS_STYLE_CLASS);
 		span.setClassName(Constants.METER);
@@ -191,5 +190,27 @@ public class ProgressBar extends DivWidget implements HasColumnLargeSize,
 		this.color = color;
 		StyleHelper.addStyle(this, color);
 	}
+
+	
+	public int getSmallSize() {
+		return smallSize;
+	}
+
+	public int getLargeSize() {
+		return largeSize;
+	}
+
+	public ArrayList<ValueChangeHandler<Double>> getHandlers() {
+		return handlers;
+	}
+
+	public Radius getRadius() {
+		return radius;
+	}
+
+	public FoundationColor getColor() {
+		return color;
+	}
+
 	
 }

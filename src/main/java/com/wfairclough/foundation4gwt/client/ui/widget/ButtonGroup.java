@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.wfairclough.foundation4gwt.client.ui.base.HasRadius;
 import com.wfairclough.foundation4gwt.client.ui.base.ListItem;
-import com.wfairclough.foundation4gwt.client.ui.base.ListItemWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
 import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
