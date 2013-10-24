@@ -15,6 +15,11 @@ Currently the Foundation4GWT widget extend the standard GWT widgets. In the futu
 
 This command will compile the JAR and place it in the target/ directory. 
 
+## Update License Headers
+
+	mvn license:format -Dyear={copyright year string}
+
+-Dyear command is a option,not required.
 
 ## License
 
