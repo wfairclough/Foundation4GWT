@@ -47,7 +47,7 @@ public class TopBarTitle extends UnorderedList {
 	private void setupWithNameMenu(String title, String menu) {
 		setStyleName(TITLE_AREA);
 		
-		setTitle(title);
+		setTitleText(title);
 		Element h1 = DOM.createElement("h1");
 		h1.appendChild(titleAnchor.getElement());
 		nameLi.getElement().appendChild(h1);
@@ -77,7 +77,7 @@ public class TopBarTitle extends UnorderedList {
 	/**
 	 * Set the Text for the title of the TopBar
 	 */
-	public void setTitle(String title) {
+	public void setTitleText(String title) {
 		titleAnchor.setText((title != null) ? title : DEFAULT);
 	}
 	

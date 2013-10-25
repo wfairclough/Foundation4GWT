@@ -109,4 +109,9 @@ public class TopBar extends NavWidget implements HasDataOptions {
 		getElement().setAttribute(Constants.DATA_OPTIONS, dataOptionsStr);
 	}
 	
+	public void setTitleText(String text)
+	{
+		topBarTitle.setTitleText(text);
+	}
+	
 }
