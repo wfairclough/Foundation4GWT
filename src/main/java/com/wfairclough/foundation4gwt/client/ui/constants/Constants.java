@@ -15,8 +15,6 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.constants;
 
-import com.wfairclough.foundation4gwt.client.ui.base.Style;
-
 
 /**
  * Constants that do not belong to a group of similar values.
@@ -36,6 +34,8 @@ public interface Constants {
 
 	public static final String DISABLED = "disabled";
 
+	public static final String CHECKED = "checked";
+	
 	public static final String FADE = "fade";
 
 	// Single use
@@ -68,6 +68,8 @@ public interface Constants {
 
 	public static final String ROW = "row";
 
+	public static final String COLUMNS = "columns";
+	
 	// Dropdown
 
 	public static final String DROPUP = "dropup";

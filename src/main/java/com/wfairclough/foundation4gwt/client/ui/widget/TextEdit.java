@@ -25,15 +25,21 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.TextBox;
+import com.wfairclough.foundation4gwt.client.ui.base.ComplexWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
+import com.wfairclough.foundation4gwt.client.ui.base.TextNode;
+import com.wfairclough.foundation4gwt.client.ui.constants.ColumnSmallSize;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
 public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers {
 
 	private static String TEXT_EDIT_STYLE_CLASS = "text-edit";
 	private static String DATA_ERROR_MESSAGE = "data-error-message";
+	private static String COLAPSE = "collapse";
 	private static int widgetCount = 0;
 	
+	private DivWidget textBoxDiv = new DivWidget();
+	private DivWidget postfixDiv = new DivWidget();
 	private TextBox textBox = new TextBox();
 	private LabelElement label = DOM.createLabel().cast();
 	private Element errorMsg = DOM.createElement(Constants.SMALL);;
@@ -43,20 +49,58 @@ public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers 
 	private String errorMsgText = "";
 	
 	public TextEdit() {
+		setClassName("row");
 		String id = TEXT_EDIT_STYLE_CLASS + "-" + widgetCount++;
 		textBox.getElement().setAttribute("id", id);
 		label.setHtmlFor(id);
 		errorMsg.setClassName(Constants.ERROR);
 		errorMsg.setAttribute(DATA_ERROR_MESSAGE, "");
 		errorMsg.getStyle().setDisplay(Display.NONE);
+		
+		textBoxDiv.setStyle(Constants.COLUMNS);
+		textBoxDiv.add(textBox);
+		
 		getElement().appendChild(label);
-		getElement().appendChild(textBox.getElement());
+		add(textBoxDiv);
 		getElement().appendChild(errorMsg);
 	}
 	
 	public TextEdit(String text) {
 		this();
 		setText(text);
+	}
+	/*
+	<div class="row collapse"><label for="text-edit-0"></label><div class="small-9 columns"><input type="text" class="" id="text-edit-0"></div><div class="small-3 columns">
+                    <span class="postfix">sec</span>
+                  </div><small class="error" data-error-message="" style="display: none;"></small></div>
+	 */
+	
+	public void setPostfix(String text) {
+		clearPostfix();
+		addStyle(COLAPSE);
+		
+		ComplexWidget span = new ComplexWidget("span");
+		span.addStyle("postfix");
+		span.add(new TextNode(text));
+
+		postfixDiv.clear();
+		postfixDiv.setStyle(Constants.COLUMNS);
+		postfixDiv.addStyle(ColumnSmallSize.SMALL_3);
+		textBoxDiv.addStyle(ColumnSmallSize.SMALL_9);
+		postfixDiv.add(span);
+		
+		add(postfixDiv);
+	}
+
+	/**
+	 * Clear the posfix text if it exists
+	 */
+	public void clearPostfix() {
+		removeStyle(COLAPSE);
+		postfixDiv.removeStyle(Constants.COLUMNS);
+		postfixDiv.removeStyle(ColumnSmallSize.SMALL_3);
+		textBoxDiv.removeStyle(ColumnSmallSize.SMALL_9);
+		postfixDiv.removeFromParent();
 	}
 	
 	/**

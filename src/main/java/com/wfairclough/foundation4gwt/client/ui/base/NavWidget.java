@@ -15,11 +15,6 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A Simple Unordered List Widget
@@ -27,73 +22,11 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Will Fairclough
  *
  */
-public class NavWidget extends ComplexPanel implements HasId, HasStyle {
+public class NavWidget extends ComplexWidget {
 	private static String NAV_TAG = "nav";
 	
-	private Element nav; 
-	
 	public NavWidget() {
-		nav = (Element) Document.get().createElement(NAV_TAG); 
-        setElement(nav); 
+		super(NAV_TAG);
 	}
-	
-	/**
-	 * Add a new li element with widget to the unordered list
-	 * 
-	 * @param child add {@link IsWidget} to unordered list
-	 */
-	@Override
-	public void add(IsWidget child) {
-		Widget widget = asWidgetOrNull(child);
-        nav.appendChild(widget.getElement()); 
-	}
-	
-	/**
-	 * Add a new li element with widget to the unordered list
-	 * 
-	 * @param child add {@link IsWidget} to unordered list
-	 */
-	@Override
-	public void add(Widget child) {
-        nav.appendChild(child.getElement());
-	}
-	
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setStyle(Style style) {
-		StyleHelper.setStyle(this, style);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addStyle(Style style) {
-		StyleHelper.addStyle(this, style);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void removeStyle(Style style) {
-		StyleHelper.removeStyle(this, style);
-	}
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getId() {
-        return getElement().getId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setId(String id) {
-        getElement().setId(id);
-    }
-	
 	
 }

@@ -15,11 +15,6 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * A Simple Section Tag Widget
@@ -27,73 +22,10 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Will Fairclough
  *
  */
-public class SectionWidget extends ComplexPanel implements HasId, HasStyle {
+public class SectionWidget extends ComplexWidget {
 	private static String SECTION_TAG = "section";
 	
-	private Element section; 
-	
 	public SectionWidget() {
-		section = (Element) Document.get().createElement(SECTION_TAG); 
-        setElement(section); 
+		super(SECTION_TAG); 
 	}
-	
-	/**
-	 * Add a new widget to the section
-	 * 
-	 * @param child add {@link IsWidget} to the section
-	 */
-	@Override
-	public void add(IsWidget child) {
-		Widget widget = asWidgetOrNull(child);
-        section.appendChild(widget.getElement()); 
-	}
-	
-	/**
-	 * Add a new widget to the section
-	 * 
-	 * @param child add {@link IsWidget} to the section
-	 */
-	@Override
-	public void add(Widget child) {
-        section.appendChild(child.getElement());
-	}
-	
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setStyle(Style style) {
-		StyleHelper.setStyle(this, style);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void addStyle(Style style) {
-		StyleHelper.addStyle(this, style);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void removeStyle(Style style) {
-		StyleHelper.removeStyle(this, style);
-	}
-
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getId() {
-        return getElement().getId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setId(String id) {
-        getElement().setId(id);
-    }
-	
-	
 }

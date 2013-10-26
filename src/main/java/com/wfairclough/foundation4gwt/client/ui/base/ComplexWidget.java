@@ -30,8 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Carlos Alexandro Becker
  * @author Will Fairclough
  */
-public class ComplexWidget extends ComplexPanel implements HasWidgets,
-		HasStyle {
+public class ComplexWidget extends ComplexPanel implements HasWidgets, HasStyle, HasId {
 
 	/**
 	 * Creates a new widget that is based on the provided html tag.
@@ -82,5 +81,48 @@ public class ComplexWidget extends ComplexPanel implements HasWidgets,
 	 */
 	public void removeStyle(Style style) {
 		StyleHelper.removeStyle(this, style);
+	}
+	
+	/**
+	 * Set the elements style class name
+	 * @param className
+	 */
+	public void setClassName(String className) {
+		getElement().setClassName(className);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getId() {
+		return getElement().getAttribute("id");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setId(String id) {
+		getElement().setAttribute("id", id);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setStyle(String style) {
+		StyleHelper.setStyle(this, style);		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addStyle(String style) {
+		StyleHelper.addStyle(this, style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removeStyle(String style) {
+		StyleHelper.removeStyle(this, style);		
 	}
 }

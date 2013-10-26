@@ -48,4 +48,29 @@ public interface HasStyle {
 	 *            the style to be removed from the Widget.
 	 */
 	void removeStyle(Style style);
+	
+	
+	/**
+	 * Replaces the widet's style with the provided one.
+	 * 
+	 * @param style
+	 *            the style to be applied to the Widget.
+	 */
+	void setStyle(String style);
+
+	/**
+	 * Adds the provided style to the widget.
+	 * 
+	 * @param style
+	 *            the style to be added to the Widget.
+	 */
+	void addStyle(String style);
+
+	/**
+	 * Removes the provided style from the widget.
+	 * 
+	 * @param style
+	 *            the style to be removed from the Widget.
+	 */
+	void removeStyle(String style);
 }

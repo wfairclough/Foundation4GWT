@@ -15,17 +15,16 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.google.gwt.user.client.ui.FlowPanel;
 
-public class DivWidget extends FlowPanel implements HasStyle, HasId {
+public class DivWidget extends ComplexWidget implements HasStyle, HasId {
 
 	
 	public DivWidget() {
-		super();
+		super("div");
 	}
 	
 	public DivWidget(String style) {
-		super();
+		this();
 		setStyleName(style);
 	}
 
