@@ -17,10 +17,16 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.wfairclough.foundation4gwt.client.ui.base.TopBarItem;
 import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 
-public class TopBarList extends UnorderedList {
+
+/**
+ * An abstract list component for the TopBar used by {@link TopBarLeftList} and {@link TopBarRightList}
+ * 
+ * @author Will Fairclough
+ *
+ */
+public abstract class TopBarList extends UnorderedList {
 
 	private static String ADD_WIDGET_TOP_BAR_LIST = "Trying to add widget to TopBarList that can only accept TopBarItem Widgets";
 

@@ -117,11 +117,33 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
+					<!-- <compileSourcesArtifacts>
+				        <compileSourcesArtifact>com.wfairclough.foundation4gwt</compileSourcesArtifact>
+				   </compileSourcesArtifacts> -->
 					<runTarget>Foundation4GWT.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<i18nMessagesBundle>com.wfairclough.foundation4gwt.client.Messages</i18nMessagesBundle>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>build-helper-maven-plugin</artifactId>
+               <version>1.7</version>
+               <executions>
+                   <execution>
+                       <phase>generate-sources</phase>
+                       <goals>
+                           <goal>add-source</goal>
+                       </goals>
+                       <configuration>
+                           <sources>
+                               <source>src/main/java</source>
+                           </sources>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
 
 			<!-- Copy static web files before executing gwt:run -->
 			<plugin>

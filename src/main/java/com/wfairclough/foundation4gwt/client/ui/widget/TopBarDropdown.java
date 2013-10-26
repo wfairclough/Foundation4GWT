@@ -7,7 +7,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.wfairclough.foundation4gwt.client.ui.base.BasicAnchor;
 import com.wfairclough.foundation4gwt.client.ui.base.HasHref;
-import com.wfairclough.foundation4gwt.client.ui.base.TopBarItem;
 import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 
 

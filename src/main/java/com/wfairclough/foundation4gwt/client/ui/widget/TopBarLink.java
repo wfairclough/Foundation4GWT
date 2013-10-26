@@ -21,7 +21,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 import com.wfairclough.foundation4gwt.client.ui.base.BasicAnchor;
 import com.wfairclough.foundation4gwt.client.ui.base.HasHref;
-import com.wfairclough.foundation4gwt.client.ui.base.TopBarItem;
 
 public class TopBarLink extends TopBarItem implements HasText, HasHref, HasClickHandlers {
 

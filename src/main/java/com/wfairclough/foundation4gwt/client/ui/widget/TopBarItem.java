@@ -13,8 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.wfairclough.foundation4gwt.client.ui.base;
+package com.wfairclough.foundation4gwt.client.ui.widget;
 
+import com.wfairclough.foundation4gwt.client.ui.base.ListItem;
+
+/**
+ * Wrap any widget to place in a {@link TopBarList} in a {@link TopBarItem}
+ * 
+ * @author Will Fairclough
+ *
+ */
 public class TopBarItem extends ListItem {
 
 	public TopBarItem() {

@@ -15,7 +15,6 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
-import com.wfairclough.foundation4gwt.client.ui.base.TopBarItem;
 
 public class TopBarDivider extends TopBarItem{
 
