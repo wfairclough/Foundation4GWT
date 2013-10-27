@@ -11,3 +11,13 @@
 	float: left;
 	padding-left: 10px
 }
+
+table.std {
+	width: 100%;
+	border: none;
+	background: rgba(0,0,0,0.0);
+}
+
+table.std tr.even, table.std tr.alt, table.std tr:nth-of-type(even) {
+	background: rgba(0,0,0,0.0);
+}
