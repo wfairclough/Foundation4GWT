@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Anchor;
  * @author Will Fairclough
  *
  */
-public class BasicAnchor extends Anchor implements HasHref {
+public class BasicAnchor extends Anchor implements HasHref, HasStyle {
 
 	public BasicAnchor() {
 		super();
@@ -44,5 +44,50 @@ public class BasicAnchor extends Anchor implements HasHref {
 		String[] hrefs = getHref().split("#");
 		return hrefs[1];
 	}
+	
+	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setStyle(Style style) {
+		StyleHelper.setStyle(this, style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addStyle(Style style) {
+		StyleHelper.addStyle(this, style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removeStyle(Style style) {
+		StyleHelper.removeStyle(this, style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setStyle(String style) {
+		StyleHelper.setStyle(this, style);		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addStyle(String style) {
+		StyleHelper.addStyle(this, style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removeStyle(String style) {
+		StyleHelper.removeStyle(this, style);		
+	}
+
 	
 }

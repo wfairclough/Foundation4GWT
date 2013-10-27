@@ -15,6 +15,8 @@
  */
 package com.wfairclough.foundation4gwt.client.ui.constants;
 
+import com.wfairclough.foundation4gwt.client.ui.base.Style;
+
 
 /**
  * Constants that do not belong to a group of similar values.
@@ -222,6 +224,8 @@ public interface Constants {
 	public static final String LARGE_UNCENTERED = "large-uncentered";
 	
 	public static final String DATA_OPTIONS = "data-options";
+
+	public static final String SELECTED = "selected";
 
 	
 }
