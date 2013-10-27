@@ -49,7 +49,7 @@ public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers 
 	private String errorMsgText = "";
 	
 	public TextEdit() {
-		setClassName("row");
+		setClassName("row text-edit");
 		String id = TEXT_EDIT_STYLE_CLASS + "-" + widgetCount++;
 		textBox.getElement().setAttribute("id", id);
 		label.setHtmlFor(id);

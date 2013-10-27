@@ -59,6 +59,8 @@ public class ResourceInjector {
         
         injectCss(res.foundationMinCss());
         
+        injectCss(res.foundation4GwtCss());
+        
         injectCss(res.modernizr());
         
         INJECTOR.configure();

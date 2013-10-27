@@ -21,20 +21,20 @@ import com.google.gwt.dom.client.Style.TextDecoration;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.Anchor;
-import com.wfairclough.foundation4gwt.client.ui.base.HasButtonSize;
+import com.wfairclough.foundation4gwt.client.ui.base.HasFoundationSize;
 import com.wfairclough.foundation4gwt.client.ui.base.HasFoundationColor;
 import com.wfairclough.foundation4gwt.client.ui.base.HasRadius;
 import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
-import com.wfairclough.foundation4gwt.client.ui.constants.ButtonSize;
+import com.wfairclough.foundation4gwt.client.ui.constants.FoundationSize;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 import com.wfairclough.foundation4gwt.client.ui.constants.FoundationColor;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
 
-public class Button extends Anchor implements HasFoundationColor,HasButtonSize, HasRadius {
+public class Button extends Anchor implements HasFoundationColor, HasFoundationSize, HasRadius {
 
 	private static String BUTTON_STYLE_CLASS = "button";
 	
-	private ButtonSize size = ButtonSize.DEFAULT;
+	private FoundationSize size = FoundationSize.DEFAULT;
 	private FoundationColor color = FoundationColor.DEFAULT;
 	private Radius radius = Radius.DEFAULT;
 	
@@ -86,9 +86,9 @@ public class Button extends Anchor implements HasFoundationColor,HasButtonSize, 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void setButtonSize(ButtonSize size) {
+	public void setFoundationSize(FoundationSize size) {
 		this.size = size;
-        StyleHelper.changeStyle(this, size, ButtonSize.class);
+        StyleHelper.changeStyle(this, size, FoundationSize.class);
 	}
 	
 	
@@ -108,7 +108,7 @@ public class Button extends Anchor implements HasFoundationColor,HasButtonSize, 
 		StyleHelper.changeStyle(this, radius, Radius.class);
 	}
 
-	public ButtonSize getButtonSize() {
+	public FoundationSize getButtonSize() {
 		return size;
 	}
 

@@ -1,0 +1,13 @@
+.text-edit label {
+	padding-left: 15px;
+}
+
+.radio-btn-group.inline label.first {
+	float: left;
+	padding-left: 0px
+}
+
+.radio-btn-group.inline label {
+	float: left;
+	padding-left: 10px
+}

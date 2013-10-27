@@ -34,11 +34,17 @@ public class FoundationPanel extends DivWidget implements HasRadius, HasPanelSty
 		StyleHelper.setStyle(this, PANEL_STYLE_CLASS);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setRadius(Radius radius) {
 		this.radius = radius;
 		StyleHelper.changeStyle(this, radius, Radius.class);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setPanelStyle(PanelStyle style) {
 		this.panelStyle = style;
 		StyleHelper.changeStyle(this, style, PanelStyle.class);

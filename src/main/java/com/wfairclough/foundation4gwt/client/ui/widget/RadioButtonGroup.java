@@ -1,7 +1,5 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
-import java.util.HashSet;
-
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
@@ -9,11 +7,16 @@ import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
 public class RadioButtonGroup extends DivWidget {
 
 	private static String ADD_WIDGET_RADIO_BTN_GROUP = "Trying to add widget to RadioButtonGroup that can only accept RadioButton Widgets"; 
+	private static int RADIO_BTN_COUNT = 0;
 	
-	private HashSet<RadioButton> radioButtons = new HashSet<RadioButton>();
+	private static String RADIO_BTN_GROUP_CLASS = "radio-btn-group";
+	private static String RADIO_BTN_GROUP_INLINE_CLASS = "inline";
 	
 	public RadioButtonGroup() {
 		super();
+		RADIO_BTN_COUNT++; // Increase Radio Button Group count
+		setStyle(RADIO_BTN_GROUP_CLASS);
+		setInline(false);
 	}
 	
 
@@ -26,7 +29,7 @@ public class RadioButtonGroup extends DivWidget {
 		
 		if (widget != null && (child instanceof RadioButton) ) {
 			RadioButton btn = (RadioButton)widget;
-			radioButtons.add(btn);
+			btn.setName("radio-btn-group-" + RADIO_BTN_COUNT);
 			super.add(btn, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_RADIO_BTN_GROUP);
@@ -41,7 +44,6 @@ public class RadioButtonGroup extends DivWidget {
 	public void add(Widget child) {
 		if (child instanceof RadioButton) {
 			RadioButton btn = (RadioButton)child;
-			radioButtons.add(btn);
 			super.add(btn, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_RADIO_BTN_GROUP);
@@ -54,8 +56,30 @@ public class RadioButtonGroup extends DivWidget {
 	 * @param name
 	 */
 	public void setName(String name) {
-		for (RadioButton btn : radioButtons) {
-			btn.setName(name);
+		for (Widget w : getChildren()) {
+			if (w instanceof RadioButton) {
+				RadioButton btn = (RadioButton)w;
+				btn.setName(name);
+			}
+		}
+	}
+	
+	
+	
+	public void setInline(boolean enabled) {
+		if (enabled) {
+			addStyle(RADIO_BTN_GROUP_INLINE_CLASS);
+			if (getChildren().size() > 0) {
+				getChildren().get(0).getElement().addClassName("first");
+			}
+		} else {
+			removeStyle(RADIO_BTN_GROUP_INLINE_CLASS);
+			for (Widget w : getChildren()) {
+				if (w instanceof RadioButton) {
+					RadioButton btn = (RadioButton)w;
+					btn.removeStyle("first");
+				}
+			}
 		}
 	}
 	

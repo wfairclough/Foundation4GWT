@@ -13,34 +13,26 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.wfairclough.foundation4gwt.client.ui.constants;
+package com.wfairclough.foundation4gwt.client.ui.base;
 
-import com.wfairclough.foundation4gwt.client.ui.base.Style;
+import com.wfairclough.foundation4gwt.client.ui.constants.FoundationSize;
 
 /**
-* Size of a {@link Button Button}.
-* 
-* @since 1.0.0
-* 
-* @author Dominik Mayer
-* @author Will Fairclough
-* 
-*/
-public enum ButtonSize implements Style {
+ * Interface for components that have a {@link FoundationSize}
+ * 
+ * @since 1.0.0
+ * 
+ * @author Will Fairclough
+ * 
+ */
+public interface HasFoundationSize {
 
-	DEFAULT(""), TINY("tiny"), SMALL("small"), MEDIUM("medium"), LARGE("large");
-	
-	private String className;
+	/**
+	 * Replaces the widet's size style.
+	 * 
+	 * @param size
+	 *            the size style to apply to the widget
+	 */
+	void setFoundationSize(FoundationSize size);
 
-	private ButtonSize(String className) {
-		this.className = className;
-	}
-
-	public String get() {
-		return className;
-	}
-
-	public String getWithoutPrefix() {
-		return className;
-	}
 }
