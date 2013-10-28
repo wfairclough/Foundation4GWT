@@ -34,6 +34,15 @@ public class TopBarLink extends TopBarItem implements HasText, HasHref, HasClick
 		setStyleName("");
 		add(anchor);
 	}
+	
+	/**
+	 * Create a TopBarLink with the text
+	 * @param text to display in link
+	 */
+	public TopBarLink(String text) {
+		this();
+		setText(text);
+	}
 
 	/**
 	 * {@inheritDoc}
