@@ -70,6 +70,8 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 	
 	private boolean valueChangeHandlerInitialized = false;
 	
+	private List<ComboBoxItem> itemsList = new ArrayList<ComboBoxItem>();
+	
 	private int itemCount = 0;
 	
 	public ComboBox() {
@@ -100,6 +102,7 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 			if (itemCount == 0) cbi.select(); // Select Item if first
 			cbi.getElement().setAttribute("value", "" + itemCount++);
 			selectList.add(cbi);
+			itemsList.add(cbi);
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_ERROR);
 		}
@@ -116,9 +119,38 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 			if (itemCount == 0) cbi.select(); // Select Item if first
 			cbi.getElement().setAttribute("value", "" + itemCount++);
 			selectList.add(cbi);
+			itemsList.add(cbi);
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_ERROR);
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean remove(int index) {
+		itemsList.remove(index);
+		return super.remove(index);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean remove(Widget w) {
+		itemsList.remove(w);
+		return super.remove(w);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean remove(IsWidget child) {
+		Widget widget = asWidgetOrNull(child);
+		itemsList.remove(widget);
+		return super.remove(child);
 	}
 	
 	
@@ -128,11 +160,7 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 	 * @return {@link List} of {@link ComboBoxItem}
 	 */
 	public List<ComboBoxItem> getItems() {
-		List<ComboBoxItem> list = new ArrayList<ComboBoxItem>();
-		for (Widget w : getChildren()) {
-			list.add((ComboBoxItem)w);
-		}
-		return list;
+		return itemsList;
 	}
 	
 	/**
