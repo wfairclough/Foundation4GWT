@@ -69,7 +69,7 @@ public class RadioButton extends ComplexWidget implements HasText, HasValue<Bool
 	 * {@inheritDoc}
 	 */
 	public Boolean getValue() {
-		return !getStyleName().contains(Constants.CHECKED);
+		return radioSpan.getStyleName().contains(Constants.CHECKED);
 	}
 
 	/**

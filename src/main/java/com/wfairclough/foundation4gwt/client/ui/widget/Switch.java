@@ -195,8 +195,6 @@ public class Switch extends DivWidget implements HasRadius, HasFoundationSize, H
 			enabled = Boolean.FALSE;
 	
 		Boolean oldValue = getValue();
-		if (oldValue.equals(enabled))
-			return;
 		
 		if (enabled) {
 			onInput.getElement().setAttribute(Constants.CHECKED, "");
@@ -205,6 +203,9 @@ public class Switch extends DivWidget implements HasRadius, HasFoundationSize, H
 			onInput.getElement().removeAttribute(Constants.CHECKED);
 			offInput.getElement().setAttribute(Constants.CHECKED, "");
 		}
+		
+		if (oldValue.equals(enabled))
+			return;
 		
 		if (fireEvents) {
 			ValueChangeEvent.fire(this, enabled);
