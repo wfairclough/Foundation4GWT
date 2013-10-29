@@ -1,5 +1,9 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
@@ -8,16 +12,17 @@ import com.wfairclough.foundation4gwt.client.ui.base.ComplexWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.TextNode;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
-public class RadioButton extends ComplexWidget implements HasText, HasValue<Boolean> {
+public class RadioButton extends ComplexWidget implements HasText, HasValue<Boolean>, HasClickHandlers {
 
+	private static int RADIO_BTN_COUNT = 0;
+	
 	private String name = "";
 	private ComplexWidget radioInput = new ComplexWidget("input");
 	private ComplexWidget radioSpan = new ComplexWidget("span");
 	private TextNode text = new TextNode("");
 	
-	
 	public RadioButton() {
-		this("");
+		this("radio-btn-" + RADIO_BTN_COUNT++);
 	}
 	
 	public RadioButton(String name) {
@@ -77,16 +82,32 @@ public class RadioButton extends ComplexWidget implements HasText, HasValue<Bool
 	/**
 	 * {@inheritDoc}
 	 */
-	public void setValue(Boolean value, boolean fireEvents) {
-		if (value) 
-			radioSpan.getElement().addClassName(Constants.CHECKED);
-		else
-			radioSpan.getElement().removeClassName(Constants.CHECKED);
+	public void setValue(Boolean enabled, boolean fireEvents) {
+		if (enabled == null)
+			enabled = Boolean.FALSE;
+	
+		Boolean oldValue = getValue();
 		
-		if (fireEvents)
-		{
-			// TODO add fire events
+		if (oldValue.equals(enabled))
+			return;
+		
+		if (enabled) {
+			radioSpan.getElement().addClassName(Constants.CHECKED);
+		} else {
+			radioSpan.getElement().removeClassName(Constants.CHECKED);
 		}
+		
+		
+		if (fireEvents) {
+			ValueChangeEvent.fire(this, enabled);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return addDomHandler(handler, ClickEvent.getType());
 	}
 
 

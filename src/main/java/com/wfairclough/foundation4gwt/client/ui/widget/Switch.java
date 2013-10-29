@@ -1,6 +1,13 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasValue;
 import com.wfairclough.foundation4gwt.client.ui.base.ComplexWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.DivWidget;
 import com.wfairclough.foundation4gwt.client.ui.base.HasFoundationSize;
@@ -11,7 +18,7 @@ import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 import com.wfairclough.foundation4gwt.client.ui.constants.FoundationSize;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
 
-public class Switch extends DivWidget implements HasRadius, HasFoundationSize {
+public class Switch extends DivWidget implements HasRadius, HasFoundationSize, HasValue<Boolean>, HasClickHandlers {
 	
 	private static String SWITCH = "switch";
 	private static int SWITCH_COUNT = 0;
@@ -59,6 +66,13 @@ public class Switch extends DivWidget implements HasRadius, HasFoundationSize {
 		add(onInput);
 		add(onLabel);
 		add(span);
+		
+		// Add Standard ClickHandler to set the value when clicked
+		addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				setValue(!isOn());
+			}
+		});
 	}
 	
 	
@@ -105,13 +119,7 @@ public class Switch extends DivWidget implements HasRadius, HasFoundationSize {
 	 * @param enabled true is on false is off
 	 */
 	public void setValue(boolean enabled) {
-		if (enabled) {
-			onInput.getElement().setAttribute(Constants.CHECKED, "");
-			offInput.getElement().removeAttribute(Constants.CHECKED);
-		} else {
-			onInput.getElement().removeAttribute(Constants.CHECKED);
-			offInput.getElement().setAttribute(Constants.CHECKED, "");
-		}
+		setValue(enabled, true);
 	}
 	
 	/**
@@ -136,6 +144,79 @@ public class Switch extends DivWidget implements HasRadius, HasFoundationSize {
 
 	public FoundationSize getFoundationSize() {
 		return size;
+	}
+
+	private boolean valueChangeHandlerInitialized = false;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
+		if (!valueChangeHandlerInitialized) {
+			ensureDomEventHandlers();
+			valueChangeHandlerInitialized = true;
+		}
+		return addHandler(handler, ValueChangeEvent.getType());
+	}
+
+
+	protected void ensureDomEventHandlers() {
+		addClickHandler(new ClickHandler() {
+		      public void onClick(ClickEvent event) {
+		        ValueChangeEvent.fire(Switch.this, getValue());
+		      }
+		    });
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Also see {@link #isOn()}
+	 */
+	public Boolean getValue() {
+		return isOn();
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setValue(Boolean value) {
+		setValue(value, true);
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setValue(Boolean enabled, boolean fireEvents) {
+		if (enabled == null)
+			enabled = Boolean.FALSE;
+	
+		Boolean oldValue = getValue();
+		if (oldValue.equals(enabled))
+			return;
+		
+		if (enabled) {
+			onInput.getElement().setAttribute(Constants.CHECKED, "");
+			offInput.getElement().removeAttribute(Constants.CHECKED);
+		} else {
+			onInput.getElement().removeAttribute(Constants.CHECKED);
+			offInput.getElement().setAttribute(Constants.CHECKED, "");
+		}
+		
+		if (fireEvents) {
+			ValueChangeEvent.fire(this, enabled);
+		}
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return addDomHandler(handler, ClickEvent.getType());
 	}
 
 	
