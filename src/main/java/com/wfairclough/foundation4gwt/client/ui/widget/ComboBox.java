@@ -3,15 +3,18 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,7 +24,7 @@ import com.wfairclough.foundation4gwt.client.ui.base.HasWidgetValues;
 import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 import com.wfairclough.foundation4gwt.client.ui.base.WidgetValues;
 
-public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<String>, HasClickHandlers, HasWidgetValues<ComboBoxItem> {
+public class ComboBox extends DivWidget implements HasValue<String>, HasClickHandlers, HasWidgetValues<ComboBoxItem> {
 
 	/*
 
@@ -69,6 +72,7 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 	private UnorderedList selectList = new UnorderedList();
 	
 	private boolean valueChangeHandlerInitialized = false;
+	private boolean changeHandlerInitialized = false;
 	
 	private List<ComboBoxItem> itemsList = new ArrayList<ComboBoxItem>();
 	
@@ -214,15 +218,6 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 	/**
 	 * {@inheritDoc}
 	 */
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public String getValue() {
 		return getSelectedItemText();
 	}
@@ -258,25 +253,92 @@ public class ComboBox extends DivWidget implements HasChangeHandlers, HasValue<S
 		}
 	}
 
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+//		if (!changeHandlerInitialized) {
+//			ensureDomEventHandlers();
+//			changeHandlerInitialized = true;
+//		}
+//		return addHandler(handler, ChangeEvent.getType());
+//	}
+//	
 	/**
 	 * {@inheritDoc}
 	 */
-	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
 		if (!valueChangeHandlerInitialized) {
-			ensureDomEventHandlers();
+//			addChangeHandler(new ChangeHandler() {
+//				public void onChange(ChangeEvent event) {
+//					ValueChangeEvent.fire(ComboBox.this, getValue());
+//				}
+//			});
 			valueChangeHandlerInitialized = true;
 		}
-		return addHandler(handler, ChangeEvent.getType());
+		return addHandler(handler, ValueChangeEvent.getType());
 	}
 
 
+	/**
+	 * No-op. CheckBox's click handler is no good for radio button, so don't use
+	 * it. Our event handling is all done in {@link #onBrowserEvent}
+	 */
 	protected void ensureDomEventHandlers() {
 		addClickHandler(new ClickHandler() {
-		      public void onClick(ClickEvent event) {
-		        ValueChangeEvent.fire(ComboBox.this, getValue());
-		      }
-		    });
+			public void onClick(ClickEvent event) {
+				ValueChangeEvent.fire(ComboBox.this, getValue());
+			}
+		});
 	}
+	
+	
+	private String oldValue;
+	
+	/**
+	 * Overridden to send ValueChangeEvents only when appropriate.
+	 */
+	@Override
+	public void onBrowserEvent(Event event) {
+		switch (DOM.eventGetType(event)) {
+			case Event.ONMOUSEUP:
+			case Event.ONBLUR:
+			case Event.ONKEYDOWN:
+				// Note the old value for onValueChange purposes (in ONCLICK case)
+				oldValue = getValue();
+				break;
+
+			case Event.ONCLICK:
+				EventTarget target = event.getEventTarget();
+				// TODO May need to add more isTarget checks
+				if (Element.is(target) && currentAnchor.getElement().isOrHasChild(Element.as(target))) {
+
+					// They clicked the label. Note our pre-click value, and
+					// short circuit event routing so that other click handlers
+					// don't hear about it
+					oldValue = getValue();
+					
+					return;
+				}
+				
+				for (ComboBoxItem item : getItems()) {
+					if(Element.is(target) && item.getElement().isOrHasChild(Element.as(target))) {
+						item.select();
+						break;
+					}
+				}
+
+				// It's not the label. Let our handlers hear about the
+				// click...
+				super.onBrowserEvent(event);
+				// ...and now maybe tell them about the change
+				ValueChangeEvent.fireIfNotEqual(ComboBox.this, oldValue, getValue());
+				return;
+		}
+
+		super.onBrowserEvent(event);
+	}
+	
 	
 	
 	/**

@@ -50,9 +50,20 @@ public class ComboBoxItem extends ListItem implements HasText {
 	 * Programically select the {@link ComboBoxItem}
 	 */
 	public void select() {
-		setStyle(Constants.SELECTED);
-		if (comboBox != null)
+		if (comboBox != null) {
+			for (ComboBoxItem item : comboBox.getItems()) {
+				item.unselect();
+			}
 			comboBox.setCurrentText(this.getText());
+		}
+		setStyle(Constants.SELECTED);
+	}
+	
+	/**
+	 * Programically unselect the {@link ComboBoxItem}
+	 */
+	public void unselect() {
+		removeStyle(Constants.SELECTED);
 	}
 	
 	/**
@@ -98,5 +109,6 @@ public class ComboBoxItem extends ListItem implements HasText {
 	protected void setParentComboBox(ComboBox comboBox) {
 		this.comboBox = comboBox;
 	}
+
 	
 }

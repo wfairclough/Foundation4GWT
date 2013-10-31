@@ -30,6 +30,14 @@ import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 import com.wfairclough.foundation4gwt.client.ui.constants.FoundationColor;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
 
+/**
+ * A Basic Button that can be customized with Foundation styles
+ * 
+ * @since 1.0.0
+ * 
+ * @author Will Fairclough
+ *
+ */
 public class Button extends Anchor implements HasFoundationColor, HasFoundationSize, HasRadius {
 
 	private static String BUTTON_STYLE_CLASS = "button";

@@ -27,7 +27,7 @@ import com.wfairclough.foundation4gwt.client.ui.base.Style;
 */
 public enum FoundationSize implements Style {
 
-	DEFAULT(""), TINY("tiny"), SMALL("small"), MEDIUM("medium"), LARGE("large");
+	DEFAULT(""), TINY("tiny"), SMALL("small"), MEDIUM("medium"), LARGE("large"), XLARGE("xlarge");
 	
 	private String className;
 

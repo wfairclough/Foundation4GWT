@@ -3,7 +3,6 @@ package com.wfairclough.foundation4gwt.client.ui.base;
 import java.util.List;
 
 import com.wfairclough.foundation4gwt.client.ui.widget.ComboBox;
-import com.wfairclough.foundation4gwt.client.ui.widget.ComboBoxItem;
 
 /**
  * Implement on widgets that can have multiple selectable widget values 
@@ -33,5 +32,5 @@ public interface HasWidgetValues<T> {
 	 * 
 	 * @return a list of WidgetItems T
 	 */
-	public <W extends WidgetValues> List<ComboBoxItem> setWidgetValues(W[] widgetValuesEnums);
+	public <W extends WidgetValues> List<T> setWidgetValues(W[] widgetValuesEnums);
 }

@@ -21,3 +21,13 @@ table.std {
 table.std tr.even, table.std tr.alt, table.std tr:nth-of-type(even) {
 	background: rgba(0,0,0,0.0);
 }
+
+.splash-dialog-box table {
+	width: 100%;
+	border: none;
+	background: rgba(0,0,0,0.0);
+}
+ 
+.splash-dialog-box table tr.even, .splash-dialog-box table tr.alt, .splash-dialog-box table tr:nth-of-type(even) {
+	background: rgba(0,0,0,0.0);
+}

@@ -1,11 +1,15 @@
 package com.wfairclough.foundation4gwt.client.ui.widget;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 import com.wfairclough.foundation4gwt.client.ui.base.ComplexWidget;
@@ -20,6 +24,9 @@ public class RadioButton extends ComplexWidget implements HasText, HasValue<Bool
 	private ComplexWidget radioInput = new ComplexWidget("input");
 	private ComplexWidget radioSpan = new ComplexWidget("span");
 	private TextNode text = new TextNode("");
+	
+	private boolean valueChangeHandlerInitialized = false;
+	boolean oldValue;
 	
 	public RadioButton() {
 		this("radio-btn-" + RADIO_BTN_COUNT++);
@@ -61,10 +68,62 @@ public class RadioButton extends ComplexWidget implements HasText, HasValue<Bool
 		radioInput.setId(name);
 	}
 
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
-		return null;
+	    if (!valueChangeHandlerInitialized) {
+	        ensureDomEventHandlers();
+	        valueChangeHandlerInitialized = true;
+	      }
+	      return addHandler(handler, ValueChangeEvent.getType());
 	}
 	
+	/**
+	 * No-op. CheckBox's click handler is no good for radio button, so don't use
+	 * it. Our event handling is all done in {@link #onBrowserEvent}
+	 */
+	protected void ensureDomEventHandlers() {
+	}
+	
+
+	/**
+	 * Overridden to send ValueChangeEvents only when appropriate.
+	 */
+	@Override
+	public void onBrowserEvent(Event event) {
+		switch (DOM.eventGetType(event)) {
+			case Event.ONMOUSEUP:
+			case Event.ONBLUR:
+			case Event.ONKEYDOWN:
+				// Note the old value for onValueChange purposes (in ONCLICK case)
+				oldValue = getValue();
+				break;
+
+			case Event.ONCLICK:
+				EventTarget target = event.getEventTarget();
+				if (Element.is(target) && radioInput.getElement().isOrHasChild(Element.as(target))) {
+
+					// They clicked the label. Note our pre-click value, and
+					// short circuit event routing so that other click handlers
+					// don't hear about it
+					oldValue = getValue();
+					return;
+				}
+
+				// It's not the label. Let our handlers hear about the
+				// click...
+				super.onBrowserEvent(event);
+				// ...and now maybe tell them about the change
+				ValueChangeEvent.fireIfNotEqual(RadioButton.this, oldValue, getValue());
+				return;
+		}
+
+		super.onBrowserEvent(event);
+	}
+	
+
 	/**
 	 * {@inheritDoc}
 	 */
