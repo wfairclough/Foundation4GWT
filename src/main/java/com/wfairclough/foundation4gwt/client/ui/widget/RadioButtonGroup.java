@@ -29,7 +29,7 @@ public class RadioButtonGroup extends DivWidget {
 		
 		if (widget != null && (child instanceof RadioButton) ) {
 			RadioButton btn = (RadioButton)widget;
-			btn.setName("radio-btn-group-" + RADIO_BTN_COUNT);
+			btn.setName(RADIO_BTN_GROUP_CLASS + RADIO_BTN_COUNT);
 			super.add(btn, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_RADIO_BTN_GROUP);
@@ -44,6 +44,7 @@ public class RadioButtonGroup extends DivWidget {
 	public void add(Widget child) {
 		if (child instanceof RadioButton) {
 			RadioButton btn = (RadioButton)child;
+			btn.setName(RADIO_BTN_GROUP_CLASS + RADIO_BTN_COUNT);
 			super.add(btn, getElement());
 		} else {
 			throw new IllegalArgumentException(ADD_WIDGET_RADIO_BTN_GROUP);
