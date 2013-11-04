@@ -365,15 +365,25 @@ public class ComboBox extends DivWidget implements HasValue<String>, HasClickHan
 		List<ComboBoxItem> list = new ArrayList<ComboBoxItem>();
 		
 		for (WidgetValues wv : widgetValuesEnums) {
-			ComboBoxItem item = new ComboBoxItem(wv.getValue());
+			ComboBoxItem item = new ComboBoxItem(wv);
 			list.add(item);
 			add(item);
 		}
 		
 		return list;
 	}
-	
-	
 
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public <W extends Enum<W> & WidgetValues> void setSelectedWidgetValue(W widgetValue) {
+		for (ComboBoxItem item : getItems()) {
+			if (item.getText().equals(widgetValue.getValue())) {
+				item.select();
+				break;
+			}
+		}
+	}
+
 }

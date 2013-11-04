@@ -3,12 +3,14 @@ package com.wfairclough.foundation4gwt.client.ui.widget;
 import com.google.gwt.user.client.ui.HasText;
 import com.wfairclough.foundation4gwt.client.ui.base.ListItem;
 import com.wfairclough.foundation4gwt.client.ui.base.TextNode;
+import com.wfairclough.foundation4gwt.client.ui.base.WidgetValues;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
 public class ComboBoxItem extends ListItem implements HasText {
 
 	private ComboBox comboBox = null;
 	private TextNode text = new TextNode("");
+	private WidgetValues widgetValue = null;
 	
 	/**
 	 * Default Constructor
@@ -24,6 +26,16 @@ public class ComboBoxItem extends ListItem implements HasText {
 	public ComboBoxItem(String text) {
 		this();
 		setText(text);
+	}
+	
+	/**
+	 * Setup the ComboBoxItem with a {@link WidgetValues WidgetValue} value.
+	 * @param wv
+	 */
+	protected ComboBoxItem(WidgetValues wv) {
+		this();
+		setText(wv.getValue());
+		setWidgetValue(wv);
 	}
 	
 	/**
@@ -108,6 +120,14 @@ public class ComboBoxItem extends ListItem implements HasText {
 	 */
 	protected void setParentComboBox(ComboBox comboBox) {
 		this.comboBox = comboBox;
+	}
+
+	protected WidgetValues getWidgetValue() {
+		return widgetValue;
+	}
+
+	protected void setWidgetValue(WidgetValues widgetValue) {
+		this.widgetValue = widgetValue;
 	}
 
 	

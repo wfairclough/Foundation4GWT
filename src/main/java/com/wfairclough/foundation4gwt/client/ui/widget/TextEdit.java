@@ -19,6 +19,8 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasKeyPressHandlers;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -31,7 +33,7 @@ import com.wfairclough.foundation4gwt.client.ui.base.TextNode;
 import com.wfairclough.foundation4gwt.client.ui.constants.ColumnSmallSize;
 import com.wfairclough.foundation4gwt.client.ui.constants.Constants;
 
-public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers {
+public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers, HasChangeHandlers {
 
 	private static String TEXT_EDIT_STYLE_CLASS = "text-edit";
 	private static String DATA_ERROR_MESSAGE = "data-error-message";
@@ -215,9 +217,19 @@ public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers 
 	public void setTabIndex(int index) {
 		textBox.setTabIndex(index);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
 		return textBox.addKeyPressHandler(handler);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+		return textBox.addChangeHandler(handler);
 	}
 	
 	

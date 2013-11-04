@@ -33,4 +33,11 @@ public interface HasWidgetValues<T> {
 	 * @return a list of WidgetItems T
 	 */
 	public <W extends WidgetValues> List<T> setWidgetValues(W[] widgetValuesEnums);
+	
+	/**
+	 * Set the selected WidgetValue with the Enum instance if this widget was configured to setWidgetValues.
+	 * 
+	 * @param widgetValue The Enum instance value to set this Widgets selected value to.
+	 */
+	public <W extends Enum<W> & WidgetValues> void setSelectedWidgetValue(W widgetValue);
 }
