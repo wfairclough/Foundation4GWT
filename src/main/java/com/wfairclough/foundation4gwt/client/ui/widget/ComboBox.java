@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -24,7 +25,7 @@ import com.wfairclough.foundation4gwt.client.ui.base.HasWidgetValues;
 import com.wfairclough.foundation4gwt.client.ui.base.UnorderedList;
 import com.wfairclough.foundation4gwt.client.ui.base.WidgetValues;
 
-public class ComboBox extends DivWidget implements HasValue<String>, HasClickHandlers, HasWidgetValues<ComboBoxItem> {
+public class ComboBox extends DivWidget implements HasValue<String>, HasClickHandlers, HasWidgetValues<ComboBoxItem>, HasChangeHandlers {
 
 	/*
 
@@ -253,27 +254,27 @@ public class ComboBox extends DivWidget implements HasValue<String>, HasClickHan
 		}
 	}
 
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
-//		if (!changeHandlerInitialized) {
-//			ensureDomEventHandlers();
-//			changeHandlerInitialized = true;
-//		}
-//		return addHandler(handler, ChangeEvent.getType());
-//	}
-//	
+	/**
+	 * {@inheritDoc}
+	 */
+	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+		if (!changeHandlerInitialized) {
+			ensureDomEventHandlers();
+			changeHandlerInitialized = true;
+		}
+		return addHandler(handler, ChangeEvent.getType());
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
 		if (!valueChangeHandlerInitialized) {
-//			addChangeHandler(new ChangeHandler() {
-//				public void onChange(ChangeEvent event) {
-//					ValueChangeEvent.fire(ComboBox.this, getValue());
-//				}
-//			});
+			addChangeHandler(new ChangeHandler() {
+				public void onChange(ChangeEvent event) {
+					ValueChangeEvent.fire(ComboBox.this, getValue());
+				}
+			});
 			valueChangeHandlerInitialized = true;
 		}
 		return addHandler(handler, ValueChangeEvent.getType());
@@ -287,7 +288,7 @@ public class ComboBox extends DivWidget implements HasValue<String>, HasClickHan
 	protected void ensureDomEventHandlers() {
 		addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				ValueChangeEvent.fire(ComboBox.this, getValue());
+//				ValueChangeEvent.fire(ComboBox.this, getValue());
 			}
 		});
 	}
@@ -333,6 +334,7 @@ public class ComboBox extends DivWidget implements HasValue<String>, HasClickHan
 				super.onBrowserEvent(event);
 				// ...and now maybe tell them about the change
 				ValueChangeEvent.fireIfNotEqual(ComboBox.this, oldValue, getValue());
+//				ValueChangeEvent.fire(ComboBox.this, getValue());
 				return;
 		}
 
