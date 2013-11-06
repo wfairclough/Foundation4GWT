@@ -2,7 +2,9 @@
 
 A GWT Library that provides the widgets of Zurb Foundation. 
 
-Currently the Foundation4GWT widget extend the standard GWT widgets. In the future I would like to change them to be lower level in order to keep compatibility across GWT versions. 
+## Contribute
+
+Take a look at the issues and send me a Pull Request.
 
 
 ## Setting up for Eclipse
