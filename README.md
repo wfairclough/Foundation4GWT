@@ -2,9 +2,7 @@
 
 A GWT Library that provides the widgets of Zurb Foundation. 
 
-## Contribute
-
-Take a look at the issues and send me a Pull Request.
+I wanted to create a easy way to use the Zurb Foundation front-end framework in my GWT projects. The goal of this project is to just inherit this GWT module and start using all the awesome Foundation widgets with the clean simple look Foundation brings.
 
 
 ## Setting up for Eclipse
@@ -22,6 +20,10 @@ This command will compile the JAR and place it in the target/ directory.
 	mvn license:format -Dyear={copyright year string}
 
 -Dyear command is a option,not required.
+
+## Contribute
+
+Take a look at the issues and send me a Pull Request.
 
 ## License
 
