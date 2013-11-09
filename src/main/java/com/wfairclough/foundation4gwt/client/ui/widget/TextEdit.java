@@ -64,7 +64,7 @@ public class TextEdit extends DivWidget implements HasText, HasKeyPressHandlers,
 		
 		getElement().appendChild(label);
 		add(textBoxDiv);
-		getElement().appendChild(errorMsg);
+		textBoxDiv.getElement().appendChild(errorMsg);
 	}
 	
 	public TextEdit(String text) {

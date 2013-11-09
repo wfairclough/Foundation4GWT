@@ -22,6 +22,13 @@ import com.wfairclough.foundation4gwt.client.ui.base.StyleHelper;
 import com.wfairclough.foundation4gwt.client.ui.constants.PanelStyle;
 import com.wfairclough.foundation4gwt.client.ui.constants.Radius;
 
+/**
+ * FoundationPanel is a wrapper around the class="panel" css
+ * 
+ * @since 1.0.0
+ * 
+ * @author Will Fairclough
+ */
 public class FoundationPanel extends DivWidget implements HasRadius, HasPanelStyle {
 
 	private static String PANEL_STYLE_CLASS = "panel";
